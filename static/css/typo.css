@@ -1,0 +1,34 @@
+
+
+h1, .s1,
+h2, .s2,
+h3, .s3,
+h4, .s4,
+h5, .s5,
+h6, .s6 {
+    padding-top:.5em;
+    padding-bottom:1em;
+}
+h1, .s1 {font-size:300%;}
+h2, .s2 {font-size:200%;}
+h3, .s3 {font-size:175%;}
+h4, .s4 {font-size:150%;}
+h5, .s5 {font-size:125%;}
+h6, .s6 {font-size:100%;}
+
+
+
+@font-face { font-family: "MolotRegular"; src: url('../type/Molot.eot'); src: local("../type/Molot"), local("../type/Molot"), url('../type/Molot.woff') format("woff"), url('../type/Molot.ttf') format("truetype"), url('../type/Molot.svg#Molot') format("svg"); }
+@font-face { font-family: "InsolentRegular"; src: url('../type/insolent.eot'); src: url('../type/insolent.woff') format('woff'), url('../type/insolent.ttf') format('truetype'), url('../type/insolent.svg#webfontD7S5Wv86') format('svg'); }
+@font-face { font-family: 'ChunkFiveRegular'; src: url('../type/Chunkfive-webfont.eot'); src: url('../type/Chunkfive-webfont.woff') format('woff'), url('../type/Chunkfive-webfont.ttf') format('truetype'), url('../type/Chunkfive-webfont.svg#webfontD7S5Wv86') format('svg'); }
+
+
+em {
+    font-family: 'ChunkFiveRegular',"InsolentRegular", "MolotRegular";
+    padding:0 1em 1em 0;
+    font-size:300%;
+    display:block;
+    font-weight: normal; text-transform: uppercase; 
+    color:#f1f1f1;
+    text-shadow: 1px 1px 0 black, 2px 2px 0 #476871, 3px 3px 0 #476871, 4px 4px 0 #476871;
+}
