@@ -1,0 +1,3 @@
+[submodule "static/js/jquery-picplz"]
+	path = static/js/jquery-picplz
+	url = git://github.com/mxml/jquery-picplz.git

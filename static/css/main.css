@@ -1,0 +1,127 @@
+a, img {
+    border:0;
+}
+
+li a:hover img, .selected img{
+    -webkit-box-shadow: 0 0 1px 3px rgba(0, 136, 206, 0.8);
+    -moz-box-shadow: 0 0 1px 3px rgba(0, 136, 206, 0.8);
+}
+
+.gray-shade-0 {
+    background-color:#f1f1f1;
+}
+
+.gray-shade-1 {
+    background-color:#e1e1e1;
+}
+
+.gray-shade-2 {
+    background-color:#c1c1c1;
+}
+
+.gray-shade-3 {
+    background-color:#b1b1b1;
+}
+
+body, html {
+    height:100%;
+    width:100%;
+}
+
+.app-holder, .pic-holder, .extra-holder {
+    height: 100%;
+}
+
+.grid-holder, .map-holder {
+    height:50%;
+    overflow:hidden;
+}
+
+
+ul.pic-grid {
+    display:block;
+    margin:10px auto 0 auto;
+    min-height:3000px;
+
+}
+ul li {
+    float:left;
+    margin:0 5px 5px 0;
+    list-style:none;
+    display:block;
+}
+img {
+    display:block;
+}
+
+.map-holder {
+    position:relative;
+}
+
+.map-holder em {
+    display:block;
+    position:absolute;
+    left:1em;
+    top:1em;
+}
+
+@media screen and (min-width: 205px) {
+    
+    ul.pic-grid {
+        padding:0;
+        width:105px;
+    }
+}
+
+@media screen and (min-width: 410px) {
+    
+    ul.pic-grid {
+        width:210px;
+    }
+}
+
+@media screen and (min-width: 615px) {
+    
+    ul.pic-grid {
+        width:315px;
+    }
+}
+
+@media screen and (min-width: 820px) {
+    
+    ul.pic-grid {
+        width:420px;
+    }
+}
+
+@media screen and (min-width: 1230px) {
+    
+    ul.pic-grid {
+        width:630px;
+    }
+}
+
+@media screen and (min-width: 1435px) {
+    
+    ul.pic-grid {
+        width:735px;
+    }
+}
+
+@media screen and (min-width: 1640px) {
+    ul.pic-grid {
+        width:840px;
+    }
+}
+
+@media screen and (min-width: 1845px) {
+    ul.pic-grid {
+        width:945px;
+    }
+}
+
+@media screen and (min-width: 2050px) {
+    ul.pic-grid {
+        width:1050px;
+    }
+}
