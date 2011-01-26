@@ -1,5 +1,6 @@
 (function($, W){
     
+    // Code snatched from: http://stackoverflow.com/questions/210717/what-is-the-best-way-to-center-a-div-on-the-screen-using-jquery
     $.fn.center = function (relation) {
         var center_in = (relation) ? $(relation) : $(window);
         
@@ -9,7 +10,7 @@
         return this;
     };
     
-    generateMapUrl = function(location, width, height){
+    var generateMapUrl = function(location, width, height){
         var base = "http://maps.google.com/maps/api/staticmap?",
             l = encodeURI(location),
             wt = (width > 640) ? 640 : width,
@@ -18,9 +19,9 @@
             url = base + "center=" + l + "&zoom=12&size="+wh+"&maptype=roadmap&markers=color:red|color:red|" + l + "&sensor=false",
             img_src = "<img src='"+url+"' width='"+wt+"' height='"+ht+"'>";
         return img_src;
-    };
+    },
     
-    var slide_time,
+    slide_time,
         
     slideshow = function(selector, index){
         clearTimeout(slide_time);
