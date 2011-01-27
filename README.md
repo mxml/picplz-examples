@@ -2,8 +2,8 @@
 
 A set of examples of how you can use the picplz API
 
-    * A [slideshow](http://mxml.github.com/picplz-examples/examples/slideshow/)
-    * A [widget](http://mxml.github.com/picplz-examples/examples/my_pics_widget/) for your website 
+* A [slideshow](http://mxml.github.com/picplz-examples/examples/slideshow/)
+* A [widget](http://mxml.github.com/picplz-examples/examples/my_pics_widget/) for your website 
 
 ## Quick Start:
 
