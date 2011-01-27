@@ -18,13 +18,11 @@ h6, .s6 {font-size:100%;}
 
 
 
-@font-face { font-family: "MolotRegular"; src: url('../type/Molot.eot'); src: local("../type/Molot"), local("../type/Molot"), url('../type/Molot.woff') format("woff"), url('../type/Molot.ttf') format("truetype"), url('../type/Molot.svg#Molot') format("svg"); }
-@font-face { font-family: "InsolentRegular"; src: url('../type/insolent.eot'); src: url('../type/insolent.woff') format('woff'), url('../type/insolent.ttf') format('truetype'), url('../type/insolent.svg#webfontD7S5Wv86') format('svg'); }
 @font-face { font-family: 'ChunkFiveRegular'; src: url('../type/Chunkfive-webfont.eot'); src: url('../type/Chunkfive-webfont.woff') format('woff'), url('../type/Chunkfive-webfont.ttf') format('truetype'), url('../type/Chunkfive-webfont.svg#webfontD7S5Wv86') format('svg'); }
 
 
 em {
-    font-family: 'ChunkFiveRegular',"InsolentRegular", "MolotRegular";
+    font-family: 'ChunkFiveRegular', helvetica;
     padding:0 1em 1em 0;
     font-size:300%;
     display:block;

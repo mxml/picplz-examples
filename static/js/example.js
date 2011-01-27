@@ -53,7 +53,8 @@
         $(".grid-holder").scrollTo( elem, {duration:2500, easing:'swing', over:-0.1});
         $(elem.parents('li').first()).addClass("selected");
        
-        $(".pic-holder img").fadeOut('slow').empty();
+        $(".pic-holder img").fadeOut('slow');
+        $(".pic-holder").empty();
         img = $(img).hide().appendTo('.pic-holder');
         img.aeImageResize({ height: pic_holder_height, width: pic_holder_width });
         img.center('.pic-holder').fadeIn("slow");
