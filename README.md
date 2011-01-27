@@ -1,6 +1,6 @@
 # Picplz Examples
 
-The first example is a slide show. (see a demo)[http://mxml.github.com/picplz-examples/examples/slideshow/]
+The first example is a slide show. [see a demo](http://mxml.github.com/picplz-examples/examples/slideshow/)
 
 ## Quick Start:
 
