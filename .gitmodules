@@ -1,3 +1,0 @@
-[submodule "examples/slideshow/static/js/jquery-picplz"]
-	path = examples/slideshow/static/js/jquery-picplz
-	url = git://github.com/mxml/jquery-picplz.git
