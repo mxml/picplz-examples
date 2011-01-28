@@ -19,7 +19,6 @@
             url = base + "center=" + l + "&zoom=12&size="+wh+"&maptype=roadmap&markers=color:red|color:red|" + l + "&sensor=false",
             img_src = "<img src='"+url+"' width='"+wt+"' height='"+ht+"'>";
             
-        console.log(location);
         return img_src;
     },
     
