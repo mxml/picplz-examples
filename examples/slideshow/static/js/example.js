@@ -12,12 +12,14 @@
     
     var generateMapUrl = function(location, width, height){
         var base = "http://maps.google.com/maps/api/staticmap?",
-            l = encodeURI(location),
+            l = location['lat'] + "," + location['lon'],
             wt = (width > 640) ? 640 : width,
             ht = (height > 640) ? 640 : height,
             wh = wt + "x" + ht,
             url = base + "center=" + l + "&zoom=12&size="+wh+"&maptype=roadmap&markers=color:red|color:red|" + l + "&sensor=false",
             img_src = "<img src='"+url+"' width='"+wt+"' height='"+ht+"'>";
+            
+        console.log(location);
         return img_src;
     },
     
@@ -34,17 +36,19 @@
             caption = elem.attr("data-caption"),
             city = elem.attr("data-city"),
             place = elem.attr("data-place"),
+            location = {
+                lat: elem.attr("data-lat"),
+                lon: elem.attr("data-lon")
+            },
             img = "<img src='"+src+"' width='"+width+"' height='"+height+"'>",
             pic_holder = $(".pic-holder"),
             pic_holder_width = pic_holder.width() - 10, 
             pic_holder_height = pic_holder.height() - 10,
-            location,
             map_src,
             map_holder = $(".map-holder");
           
         map_holder.empty();
-        if(city != "" || place != ""){
-            location = place + " " + city;
+        if(location.lat != ""){
             map_src = generateMapUrl(location,map_holder.width(),map_holder.height() );
             $(map_src).fadeOut().appendTo(map_holder).aeImageResize({ height: map_holder.height(), width: map_holder.width() }).center(map_holder);
         } else {
@@ -85,7 +89,7 @@
                 slideshow(".pic-grid li img", index);
                 
                 return false;
-            })
+            });
         },
         handleData: function(data, first){
             var html = "";
@@ -100,6 +104,8 @@
                     caption = val.caption,
                     city = (val.city) ? val.city.name : "",
                     place = (val.place) ? val.place.name : "",
+                    lat = (val.location) ? val.location.lat : "",
+                    lon = (val.location) ? val.location.lon : "",
                     string = [
                         "<li><a href='"+url+"' target='_blank'>",
                         "<img src='"+src+"' ",
@@ -111,6 +117,8 @@
                         "data-caption='"+ caption +"' ",
                         "data-place='"+ place +"' ",
                         "data-city='"+ city+"' ",
+                        "data-lat='"+ lat +"' ",
+                        "data-lon='"+ lon +"' ",
                         "></a></li>"].join("");
                 html = html + string;
             });
