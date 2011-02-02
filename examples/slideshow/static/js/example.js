@@ -148,9 +148,6 @@
         },
         intrestingFeed: function(first, last_pic_id){
             var that = this;
-            if(first){
-                $(".feed-title").html("<em>Pics<br>At</br>Your Network</em>");
-            }
             $.picplz.interesting(function(data){
                 that.handleData(data, first, function(last_pic_id){
                     $.picplz_window_media.intrestingFeed(false, last_pic_id);
@@ -159,6 +156,9 @@
         },
         networkFeed: function(first, last_pic_id){
             var that = this;
+            if(first){
+                $(".feed-title").html("<em>Pics<br>At</br>Your Network</em>");
+            }
             $.picplz.network(function(data){
                 that.handleData(data, first, function(last_pic_id){
                     $.picplz_window_media.networkFeed(false, last_pic_id);
@@ -214,7 +214,7 @@
     $("a[href='#/yournetwork/']").click(function(e){
         e.preventDefault();
         if(!localStorage.oauth_token){
-            window.location = "https://picplz.com/oauth2/authenticate?client_id=UdVYTQe4verfuVkMZdPcZdQgVkNF86Zw&response_type=token&redirect_uri=http://mxml.github.com/picplz-examples/examples/slideshow/";
+            window.location = "https://picplz.com/oauth2/authenticate?client_id=UdVYTQe4verfuVkMZdPcZdQgVkNF86Zw&response_type=token&redirect_uri=http://mxml.github.com/picplz-examples/examples/slideshow/i";
         } else {
             $.picplz.network(function(data){
                 console.log(data);
