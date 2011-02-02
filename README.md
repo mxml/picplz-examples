@@ -4,7 +4,8 @@ A set of examples of how you can use the picplz API
 
 * A [slideshow](http://mxml.github.com/picplz-examples/examples/slideshow/)
   * Now uses geo location to  display the map
-* A [widget](http://mxml.github.com/picplz-examples/examples/my_pics_widget/) for your website 
+* A [widget](http://mxml.github.com/picplz-examples/examples/my_pics_widget/) for your website
+* A demo for using [authenticated reads](http://mxml.github.com/picplz-examples/examples/auth_reads/) for your website 
 
 ## Quick Start:
 
