@@ -205,7 +205,7 @@
         },
         appendMore: function(){
             if(this.last_pic_id && this.more_pics){
-                this.more_pics(false, this.last_pic_id);
+                this.more_pics(this.last_pic_id);
             }
         }
     };
