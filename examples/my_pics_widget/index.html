@@ -1,21 +1,80 @@
 <html class="gray-shade-0">
     <head>
-        <title>A widget for my pics</title>        
+        <title>Picplz Widget Builder</title>        
         <style type="text/css" media="screen">
+            * {
+                padding:0;
+                margin:0;
+            }
+            p, h1 {
+                text-align:center;
+            }
             p {
                 padding:10px 20px 5px 20px;
+                font-size:120%;
+                line-height:1.2;
             }
             .my_widget {
                 padding:20px;
             }
+            .my-widget-holder {
+                width:210px;
+                margin:0 auto;
+            }
+            body {
+                width:600px;
+                margin:0 auto;
+            }
+            .widget-code {
+                width:100%;
+                height:200px;
+            }
         </style>
     </head>
     <body class='gray-shade-0'>
-        <h1>A widget for my pics</h1>
-        <p>Enter your username, and press go to see your latest pics<p>
-        <p><span><label for="username">Username:</label> <input name="username" value="voidfiles"> <a href="#/go">Go</a></p>
-        <p>Authenticated Test: <a href="https://picplz.com/oauth2/authenticate?client_id=emeTeCxMtHAXJXT8Yu4KxuBvYwwGDGyv&response_type=token&redirect_uri=http://127.0.0.1:8010/index.html">Go</a></p>
-        <div class="my_widget"></div>
+        <h1>A Picplz Widget</h1>
+        <p>Enter your username, and press go to see your latest pics.<br><span><label for="username">Username:</label> <input name="username" value="voidfiles"> <a href="#/go">Go</a><p>
+        <div class="the-widget-code">
+        <style type="text/css" media="screen">
+            .pp-user-widget {
+                width:210px;
+                font-family:Helvetica, Arial;
+                font-weight:bold;
+            }
+            .pp-user-widget ul {
+                width:100%;
+                margin:0;
+                padding:0;
+            }
+            .pp-user-widget li, .pp-user-widget li a  {
+                width:100px;
+                height:100px;
+                display:block;
+            }
+            .pp-user-widget li {
+                list-style:none;
+                padding:0;
+                float:left;
+                margin:0 5px 5px 0;
+            }
+            .pp-title {
+                padding-bottom:5px;
+            }
+            .pp-brand em {
+                text-align:right;
+                padding-right:5px;
+                line-height:13px;
+            }
+        </style>
+        <div class="my-widget-holder">
+            <div class="pp-user-widget">
+                <em class="pp-title"></em>
+                <div class='pp-w-body'></div>
+                <div class='pp-brand'>
+                    <a href="http://picplz.com" title="widget by picplz"><img src='http://a3.picplzthumbs.com/i/kpaeOjVAncDfxS26pGsyOp1xXRs.png'></a>
+                </div>
+            </div>
+        </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" charset="utf-8">
             (function(JQ){
@@ -25,33 +84,9 @@
                         if(data.result == "ok"){
                             var pics = data.value.users[0].pics,
                                 html = "<ul class='picplz-user-widget' >",
-                                holder = JQ(".my_widget"),
-                                val, url, src, width, height;
-                            console.log(pics);
-                            JQ.each(pics, function(i, val){
-                                url = val.url;
-                                src = val.pic_files["100sh"].img_url;
-                                width = val.pic_files["100sh"].width;
-                                height = val.pic_files["100sh"].height;
-                                html = html + " <li><a href='http://picplz.com/"+url+"'><img src='"+src+"' width='"+width+"' height='"+height+"'></a></li>";
-                            });
-                            html = html + "</ul>";
-                            holder.html(html);
-
-                        }
-                    });
-                };
-                show_my_network = function( access_token){
-                    JQ.getJSON("https://api.picplz.com/api/v2/feed.json?callback=?",{
-                        'oauth_token': access_token,
-                        'include_pics': 1,
-                        'type':'network'
-                    },
-                    function(data){
-                        if(data.result == "ok"){
-                            var pics = data.value.pics,
-                                html = "<ul class='picplz-user-widget' >",
-                                holder = JQ(".my_widget"),
+                                parent = JQ(".pp-user-widget"),
+                                title = JQ(".pp-title", parent),
+                                holder = JQ(".pp-w-body", parent),
                                 val, url, src, width, height;
                             JQ.each(pics, function(i, val){
                                 url = val.url;
@@ -62,27 +97,50 @@
                             });
                             html = html + "</ul>";
                             holder.html(html);
-
+                            title.html('Recent pics by ' + username);
                         }
                     });
-                };
-                
-                JQ("a[href='#/go']").click(function(e){
+                };                
+                show_my_pics("voidfiles");
+                JQ("a[href='#/go']").live('click', function(e){
                     e.preventDefault();
                     show_my_pics( JQ("input[name='username']").val() );
+                    gen_code(JQ("input[name='username']").val());
                     return false;
                 });
-                
-                if(document.location.hash != ""){
-                    var hash = document.location.hash;
-                        token = unescape(hash.split("=")[1]);
-                    show_my_network(token);
-                    
-                } else {
-                    show_my_pics("voidfiles");
-                }
             })(jQuery);
             jQuery.noConflict(true);
+        </script>
+        </div>
+        
+        <h2>Embed this code in your page</h2>
+        <textarea class="widget-code"></textarea>
+        
+        <textarea class="real_code" style="display:none">
+        <style type="text/css" media="screen">
+        .pp-user-widget{width:210px;font-family:Helvetica,Arial;font-weight:bold;} .pp-user-widget ul{width:100%;margin:0;padding:0;} .pp-user-widget li,.pp-user-widget li a{width:100px;height:100px;display:block;}
+        .pp-user-widget li{list-style:none;padding:0;float:left;margin:0 5px 5px 0;} .pp-title{padding-bottom:5px;} .pp-brand em{text-align:right;padding-right:5px;line-height:13px;}
+        </style>
+        <div class="my-widget-holder"><div class="pp-user-widget">
+        <em class="pp-title"></em><div class='pp-w-body'></div>
+        <div class='pp-brand'><a href="http://picplz.com" title="widget by picplz"><img src='http://a3.picplzthumbs.com/i/kpaeOjVAncDfxS26pGsyOp1xXRs.png'></a></div>
+        </div></div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+        (function(a){show_my_pics=function(b){a.getJSON("https://api.picplz.com/api/v2/user.json?include_pics=1&username="+b+"&callback=?",function(h){if(h.result=="ok"){var f=h.value.users[0].pics,i="<ul class='picplz-user-widget' >",l=a(".pp-user-widget"),k=a(".pp-title",l),j=a(".pp-w-body",l),g,d,c,e,m;a.each(f,function(n,o){d=o.url;c=o.pic_files["100sh"].img_url;e=o.pic_files["100sh"].width;m=o.pic_files["100sh"].height;i=i+" <li><a href='http://picplz.com/"+d+"'><img src='"+c+"' width='"+e+"' height='"+m+"'></a></li>";});i=i+"</ul>";j.html(i);k.html("Recent pics by "+b);}});};show_my_pics(USERNAME_REPLACE);})(jQuery);jQuery.noConflict(true);
+        </script>
+        </textarea>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            function gen_code(username){
+                var code = $(".real_code").val();
+                console.log(code);
+                code = code.replace("USERNAME_REPLACE",'"'+username+'"');
+                code = $.trim(code.replace(/(\n\r|\n|\r|\t\|\s+)/gm," "));
+                console.log(code);
+                $(".widget-code").val(code);
+            }
+            gen_code("voidfiles");
         </script>
     </body>
 </html>

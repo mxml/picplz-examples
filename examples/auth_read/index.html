@@ -1,0 +1,88 @@
+<html class="gray-shade-0">
+    <head>
+        <title>A widget for my pics</title>        
+        <style type="text/css" media="screen">
+            p {
+                padding:10px 20px 5px 20px;
+            }
+            .my_widget {
+                padding:20px;
+            }
+        </style>
+    </head>
+    <body class='gray-shade-0'>
+        <h1>A widget for my pics</h1>
+        <p>Enter your username, and press go to see your latest pics<p>
+        <p><span><label for="username">Username:</label> <input name="username" value="voidfiles"> <a href="#/go">Go</a></p>
+        <p>Authenticated Test: <a href="https://picplz.com/oauth2/authenticate?client_id=emeTeCxMtHAXJXT8Yu4KxuBvYwwGDGyv&response_type=token&redirect_uri=http://127.0.0.1:8010/index.html">Go</a></p>
+        <div class="my_widget"></div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function(JQ){
+                
+                show_my_pics = function(username){
+                    JQ.getJSON("https://api.picplz.com/api/v2/user.json?include_pics=1&username="+username+"&callback=?", function(data){
+                        if(data.result == "ok"){
+                            var pics = data.value.users[0].pics,
+                                html = "<ul class='picplz-user-widget' >",
+                                holder = JQ(".my_widget"),
+                                val, url, src, width, height;
+                            console.log(pics);
+                            JQ.each(pics, function(i, val){
+                                url = val.url;
+                                src = val.pic_files["100sh"].img_url;
+                                width = val.pic_files["100sh"].width;
+                                height = val.pic_files["100sh"].height;
+                                html = html + " <li><a href='http://picplz.com/"+url+"'><img src='"+src+"' width='"+width+"' height='"+height+"'></a></li>";
+                            });
+                            html = html + "</ul>";
+                            holder.html(html);
+
+                        }
+                    });
+                };
+                show_my_network = function( access_token){
+                    JQ.getJSON("https://api.picplz.com/api/v2/feed.json?callback=?",{
+                        'oauth_token': access_token,
+                        'include_pics': 1,
+                        'type':'network'
+                    },
+                    function(data){
+                        if(data.result == "ok"){
+                            var pics = data.value.pics,
+                                html = "<ul class='picplz-user-widget' >",
+                                holder = JQ(".my_widget"),
+                                val, url, src, width, height;
+                            JQ.each(pics, function(i, val){
+                                url = val.url;
+                                src = val.pic_files["100sh"].img_url;
+                                width = val.pic_files["100sh"].width;
+                                height = val.pic_files["100sh"].height;
+                                html = html + " <li><a href='http://picplz.com/"+url+"'><img src='"+src+"' width='"+width+"' height='"+height+"'></a></li>";
+                            });
+                            html = html + "</ul>";
+                            holder.html(html);
+
+                        }
+                    });
+                };
+                
+                JQ("a[href='#/go']").click(function(e){
+                    e.preventDefault();
+                    show_my_pics( JQ("input[name='username']").val() );
+                    return false;
+                });
+                
+                if(document.location.hash != ""){
+                    var hash = document.location.hash;
+                        token = unescape(hash.split("=")[1]);
+                    show_my_network(token);
+                    
+                } else {
+                    show_my_pics("voidfiles");
+                }
+            })(jQuery);
+            jQuery.noConflict(true);
+        </script>
+    </body>
+</html>
