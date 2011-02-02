@@ -214,7 +214,7 @@
     $("a[href='#/yournetwork/']").click(function(e){
         e.preventDefault();
         if(!localStorage.oauth_token){
-            window.location = "https://picplz.com/oauth2/authenticate?client_id=UdVYTQe4verfuVkMZdPcZdQgVkNF86Zw&response_type=token&redirect_uri=http://mxml.github.com/picplz-examples/examples/slideshow/i";
+            window.location = "https://picplz.com/oauth2/authenticate?client_id=UdVYTQe4verfuVkMZdPcZdQgVkNF86Zw&response_type=token&redirect_uri=http://mxml.github.com/picplz-examples/examples/slideshow/";
         } else {
             $.picplz.network(function(data){
                 console.log(data);
