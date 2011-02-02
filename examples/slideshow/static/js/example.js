@@ -157,7 +157,7 @@
         networkFeed: function(first, last_pic_id){
             var that = this;
             if(first){
-                $(".feed-title").html("<em>Pics<br>At</br>Your Network</em>");
+                $(".feed-title").html("<em>Pics<br>In</br>Your Network</em>");
             }
             $.picplz.network(function(data){
                 that.handleData(data, first, function(last_pic_id){
