@@ -65,7 +65,55 @@ img {
     top:1em;
 }
 
-@media screen and (min-width: 205px) {
+.bottom-menu {
+    position:fixed;
+    height:30px;
+    bottom:0;
+    background-color:#010101;
+    color:#f1f1f1;
+    width: 100%;
+    font-size:25px;
+    padding-top:5px;
+}
+
+.bottom-menu a {
+    color:#f1f1f1;
+    text-decoration:none;
+    height:30px;
+    padding:.25em .5em .5em .5em;
+    
+}
+
+.bottom-menu a:hover {
+    background-color:#f1f1f1;
+    color:#010101;
+}
+
+.bottom-menu .menu {
+    float:right;
+    margin:0;
+}
+
+.feed-title {
+    position:fixed;
+    top:30px;
+    left:30px;
+    opacity:.5;
+}
+
+.brand a {
+    display:block;
+    width:100px;
+    height:25px;
+    margin-left:10px;
+    text-indent:-9999em;
+    background: url(http://a3.picplzthumbs.com/i/kpaeOjVAncDfxS26pGsyOp1xXRs.png) no-repeat;
+}
+
+.brand a:hover {
+    background-color:transparent;
+}
+@media screen and (min-width: 200px) {
     
     ul.pic-grid {
         padding:0;

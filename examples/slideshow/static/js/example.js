@@ -72,16 +72,18 @@
         }, 4000);
         
         if((length - index) < 5){
-            
             $.picplz_window_media.appendMore();
         }
         
     };
     
     $.picplz_window_media = {
-        init: function(){
+        init: function(token){
             var that = this;
-            this.getList(true);
+            if(token){
+                $.picplz.init(token);
+            }
+            
             $(".pic-grid li img").live("click", function(e){
                 e.preventDefault();
                 var index = $(".pic-grid li img").index(e.target);
@@ -89,8 +91,9 @@
                 
                 return false;
             });
+
         },
-        handleData: function(data, first){
+        renderData: function(data){
             var html = "";
             $.each(data.pics, function(i, val){
                 var url = "http://picplz.com" + val.url,
@@ -121,7 +124,14 @@
                         "></a></li>"].join("");
                 html = html + string;
             });
+            
+            return html;
+        },
+        handleData: function(data, first, more_pics){
+            var html = this.renderData(data);
             if(first){
+                this.last_pic_id = false;
+                this.more_pics = more_pics;
                 html = "<ul class='pic-grid line'>" + html + "</ul>";
                 $(".grid-holder").empty().html(html);
                 slideshow(".pic-grid li img", 0);
@@ -136,23 +146,111 @@
                 this.last_pic_id = false;
             }
         },
-        getList: function(first, last_pic_id){
+        intrestingFeed: function(first, last_pic_id){
             var that = this;
+            if(first){
+                $(".feed-title").html("<em>Pics<br>At</br>Your Network</em>");
+            }
             $.picplz.interesting(function(data){
-                that.handleData(data, first);
+                that.handleData(data, first, function(last_pic_id){
+                    $.picplz_window_media.intrestingFeed(false, last_pic_id);
+                });
             },last_pic_id);
         },
+        networkFeed: function(first, last_pic_id){
+            var that = this;
+            $.picplz.network(function(data){
+                that.handleData(data, first, function(last_pic_id){
+                    $.picplz_window_media.networkFeed(false, last_pic_id);
+                });
+            },last_pic_id);
+        },
+        cityFeed: function(first, key, last_pic_id){
+            var that = this;
+            if(first){
+                $(".feed-title").html("<em>Pics<br>In</br>San Francisco</em>");
+            }
+            console.log("here");
+            $.picplz.cityById(function(data){
+                data = data.cities[0];
+                that.handleData(data, first, function(last_pic_id){
+                    $.picplz_window_media.cityFeed(false, key, last_pic_id);
+                });
+            }, key, false, true);
+        },
+        placeFeed: function(first, key, last_pic_id){
+            var that = this;
+            if(first){
+                $(".feed-title").html("<em>Pics<br>At</br><a href='http://picplz.com/pics/california-academy-of-sciences-san-francisco-ca/'>California Academy <br> of Sciences</a></em>");
+            }
+            $.picplz.placeBySlug(function(data){
+                data = data.places[0];
+                console.log("Here", data);
+                that.handleData(data, first, function(last_pic_id){
+                    $.picplz_window_media.placeFeed(false, key, last_pic_id);
+                });
+            }, key, false, true);
+        },
+        userFeed: function(first, key, last_pic_id){
+            var that = this;
+            if(first){
+                $(".feed-title").html("<em>Pics<br>taken by</br><a href='http://picplz.com/user/lagartija/'>lagartija</a></em>");
+            }
+            $.picplz.userByUsername(function(data){
+                data = data.users[0];
+                that.handleData(data, first, function(lafst_pic_id){
+                    $.picplz_window_media.userFeed(false, key, last_pic_id);
+                });
+            }, key, false, true);
+        },
         appendMore: function(){
-            if(this.last_pic_id){
-                this.getList(false, this.last_pic_id);
+            if(this.last_pic_id && this.more_pics){
+                this.more_pics(false, this.last_pic_id);
             }
         }
     };
+    
+    
+    $("a[href='#/yournetwork/']").click(function(e){
+        e.preventDefault();
+        if(!localStorage.oauth_token){
+            window.location = "https://picplz.com/oauth2/authenticate?client_id=emeTeCxMtHAXJXT8Yu4KxuBvYwwGDGyv&response_type=token&redirect_uri=http://127.0.0.1:8010/index.html";
+        } else {
+            $.picplz.network(function(data){
+                console.log(data);
+            });
+        }
+        return false;
+    });
+    $("a[href='#/id/3/']").click(function(e){
+        e.preventDefault();
+        $.picplz_window_media.cityFeed(true, 3);
+        return false;
+    });
+    $("a[href='#/slug/california-academy-of-sciences-san-francisco-ca/']").click(function(e){
+        e.preventDefault();
+        $.picplz_window_media.placeFeed(true, 'california-academy-of-sciences-san-francisco-ca');
+        return false;
+    });
+    $("a[href='#/username/lagartija/']").click(function(e){
+        e.preventDefault();
+        $.picplz_window_media.userFeed(true, 'lagartija');
+        return false;
+    });
     
 })(jQuery, window);
 
 
 
 $(function(){
-    $.picplz_window_media.init();
+    if(document.location.hash){
+        var hash = document.location.hash;
+            token = unescape(hash.split("=")[1]);
+        $.picplz_window_media.init(token);
+        $.picplz_window_media.networkFeed(true);
+    } else {
+        $.picplz_window_media.init();
+        $.picplz_window_media.intrestingFeed(true);
+    }
+    
 });

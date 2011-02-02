@@ -23,10 +23,21 @@ h6, .s6 {font-size:100%;}
 
 em {
     font-family: 'ChunkFiveRegular', helvetica;
-    padding:0 1em 1em 0;
+    padding:0 .5em .5em 0;
     font-size:300%;
     display:block;
     font-weight: normal; text-transform: uppercase; 
     color:#f1f1f1;
+    text-shadow: 1px 1px 0 black, 2px 2px 0 #476871, 3px 3px 0 #476871, 4px 4px 0 #476871;
+}
+
+em a {
+    color:#f1f1f1;
+    text-decoration:none;
+}
+
+.bottom-menu  {
+    font-family: 'ChunkFiveRegular', helvetica;
+    font-weight: normal; text-transform: uppercase; 
     text-shadow: 1px 1px 0 black, 2px 2px 0 #476871, 3px 3px 0 #476871, 4px 4px 0 #476871;
 }
