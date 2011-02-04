@@ -1,0 +1,40 @@
+<html class="gray-shade-0">
+    <head>
+        <title>A widget for my pics</title>        
+        <style type="text/css" media="screen">
+            p {
+                padding:10px 20px 5px 20px;
+            }
+            .my_widget {
+                padding:20px;
+            }
+        </style>
+    </head>
+    <body class='gray-shade-0'>
+        <h1>Token Generator</h1>
+        <p>To generate a token for your app click <a href="https://picplz.com/oauth2/authenticate?client_id=7f63PpZh9xvbyqdbed2GM6TKPdgQ229K&response_type=token&redirect_uri=http://mxml.github.com/picplz-examples/examples/generate_a_token/">here</a><p>
+        <div class='generator-token'>
+            <h2></h2>
+            <p class='token'></p>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function(JQ){
+                
+                JQ("a[href='#/go']").click(function(e){
+                    e.preventDefault();
+                    show_my_pics( JQ("input[name='username']").val() );
+                    return false;
+                });
+                
+                if(document.location.hash != ""){
+                    var hash = document.location.hash;
+                        token = unescape(hash.split("=")[1]);
+                    JQ(".generator-token h2").html("Here is your token");
+                    JQ(".generator-token token").html(token);
+                }
+            })(jQuery);
+            jQuery.noConflict(true);
+        </script>
+    </body>
+</html>
