@@ -1,0 +1,117 @@
+<html class="gray-shade-0">
+    <head>
+        <title>Picplz iFrame</title>        
+        <style type="text/css" media="screen">
+            * {
+                padding:0;
+                margin:0;
+            }
+            .my_widget {
+                padding:20px;
+            }
+            .my-widget-holder {
+                width:210px;
+                margin:0 auto;
+            }
+
+            .widget-code {
+                width:100%;
+                height:200px;
+            }
+            
+            .pp-user-widget {
+                width:210px;
+                font-family:Helvetica, Arial;
+                font-weight:bold;
+            }
+            .pp-user-widget ul {
+                width:100%;
+                margin:0;
+                padding:0;
+            }
+            .pp-user-widget li, .pp-user-widget li a  {
+                width:100px;
+                height:100px;
+                display:block;
+            }
+            .pp-user-widget li {
+                list-style:none;
+                padding:0;
+                float:left;
+                margin:0 5px 5px 0;
+            }
+            .pp-title {
+                padding-bottom:5px;
+            }
+            .pp-brand em {
+                text-align:right;
+                padding-right:5px;
+               
+            .pp-user-widget a {
+                border:0;
+                text-decoration: none;
+            }
+            .pp-user-widget a {
+                border:0;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body class='gray-shade-0'>
+        <div class="my-widget-holder">
+            <div class="pp-user-widget">
+                <em class="pp-title"></em>
+                <div class='pp-w-body'></div>
+                <div class='pp-brand'>
+                    <a href="http://picplz.com" title="widget by picplz"><img src='http://a3.picplzthumbs.com/i/kpaeOjVAncDfxS26pGsyOp1xXRs.png'></a>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function(JQ){
+                
+                show_my_pics = function(username){
+                    JQ.getJSON("https://api.picplz.com/api/v2/user.json?include_pics=1&username="+username+"&callback=?", function(data){
+                        if(data.result == "ok"){
+                            var pics = data.value.users[0].pics,
+                                html = "<ul class='picplz-user-widget' >",
+                                parent = JQ(".pp-user-widget"),
+                                title = JQ(".pp-title", parent),
+                                holder = JQ(".pp-w-body", parent),
+                                val, url, src, width, height;
+                            JQ.each(pics, function(i, val){
+                                url = val.url;
+                                src = val.pic_files["100sh"].img_url;
+                                width = val.pic_files["100sh"].width;
+                                height = val.pic_files["100sh"].height;
+                                html = html + " <li><a href='http://picplz.com/"+url+"'><img src='"+src+"' width='"+width+"' height='"+height+"'></a></li>";
+                            });
+                            html = html + "</ul>";
+                            holder.html(html);
+                            title.html('Recent pics by ' + username);
+                        }
+                    });
+                };                
+                
+                JQ("a[href='#/go']").live('click', function(e){
+                    e.preventDefault();
+                    show_my_pics( JQ("input[name='username']").val() );
+                    gen_code(JQ("input[name='username']").val());
+                    return false;
+                });
+                JQ(function(){
+                    if(document.location.hash){
+                        username = document.location.hash.replace("#", "");
+                        console.log(username);
+                        show_my_pics(username);
+                    } else {
+                        console.log("You need to pass a username");
+                        JQ(".pp-user-widget .pp-w-body").html("<p>You need to pass a username</p>");
+                    }  
+                });
+            })(jQuery);
+            jQuery.noConflict(true);
+        </script>
+    </body>
+</html>
